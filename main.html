@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Chef - Recipe Sharing Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <div class="logo-text">
+                        <div class="logo-title">Pocket Chef</div>
+                        <div class="tagline">Prep less, impress more.</div>
+                    </div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#" class="nav-link active" onclick="showHome()" data-label="Home">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showCategories()" data-label="Categories">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showFavorites()" data-label="Favorites">
+                        <i class="fas fa-bookmark"></i>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showMyRecipes()" data-label="My Recipes">
+                        <i class="fas fa-book"></i>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showAbout()" data-label="About">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </div>
+                
+                <div class="nav-right">
+                    <div class="search-bar">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" placeholder="Search recipes..." id="searchInput">
+                    </div>
+                    
+                    <div class="nav-actions">
+                        <div id="authArea"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Content Sections -->
+            <div id="contentArea">
+                <!-- Home View -->
+                <div id="homeView" class="content-view active">
+                    <div class="view-header">
+                        <div class="view-title">
+                            <h2>Explore Recipes</h2>
+                            <p>Discover delicious recipes from our community</p>
+                        </div>
+                        <button class="btn-primary" id="addRecipeBtn" onclick="showAddRecipeModal()">
+                            <i class="fas fa-plus"></i>
+                            Add Recipe
+                        </button>
+                    </div>
+                    
+                    <!-- Recipe Grid -->
+                    <div class="recipe-grid" id="recipeGrid">
+                        <!-- Recipes will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Categories View -->
+                <div id="categoriesView" class="content-view">
+                    <div class="view-header">
+                        <div class="view-title">
+                            <h2>Categories</h2>
+                            <p>Browse recipes by category</p>
+                        </div>
+                    </div>
+                    
+                    <div class="categories-grid" id="categoriesGrid">
+                        <!-- Categories will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Favorites View -->
+                <div id="favoritesView" class="content-view">
+                    <div class="view-header">
+                        <div class="view-title">
+                            <h2>Your Favorites</h2>
+                            <p>Recipes you've saved for later</p>
+                        </div>
+                    </div>
+                    
+                    <div class="recipe-grid" id="favoritesGrid">
+                        <!-- Favorites will be populated here -->
+                    </div>
+                </div>
+
+                <!-- My Recipes View -->
+                <div id="myRecipesView" class="content-view">
+                    <div class="view-header">
+                        <div class="view-title">
+                            <h2>My Recipes</h2>
+                            <p>Recipes you've created</p>
+                        </div>
+                        <button class="btn-primary" onclick="showAddRecipeModal()">
+                            <i class="fas fa-plus"></i>
+                            Create New Recipe
+                        </button>
+                    </div>
+                    
+                    <div class="recipe-grid" id="myRecipesGrid">
+                        <!-- User's recipes will be populated here -->
+                    </div>
+                </div>
+
+                <!-- About View -->
+                <div id="aboutView" class="content-view">
+                    <div class="view-header">
+                        <div class="view-title">
+                            <h2>About Pocket Chef</h2>
+                            <p>Your go-to recipe sharing platform</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-content">
+                        <div class="about-card">
+                            <div class="about-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h3>Our Mission</h3>
+                            <p>To make cooking accessible and enjoyable for everyone by providing a platform where food lovers can share, discover, and create delicious recipes.</p>
+                        </div>
+                        
+                        <div class="about-card">
+                            <div class="about-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Community</h3>
+                            <p>Join thousands of home cooks and professional chefs who share their culinary creations, tips, and techniques.</p>
+                        </div>
+                        
+                        <div class="about-card">
+                            <div class="about-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Features</h3>
+                            <ul>
+                                <li>Save and organize your favorite recipes</li>
+                                <li>Share your own recipes with the community</li>
+                                <li>Rate and comment on recipes</li>
+                                <li>Advanced search and filtering</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipe Details Modal -->
+    <div class="modal" id="recipeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Recipe Details</div>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <img id="modalImage" class="modal-image" src="" alt="">
+            
+            <div class="modal-body">
+                <div class="modal-recipe-header">
+                    <div>
+                        <h2 class="modal-recipe-title" id="modalTitle"></h2>
+                        <p class="recipe-author" id="modalAuthor"></p>
+                        <div class="modal-recipe-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span id="modalTime"></span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal"></i>
+                                <span id="modalDifficulty"></span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-tag"></i>
+                                <span id="modalCategory"></span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-heart"></i>
+                                <span id="modalLikes"></span> likes
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-badge">
+                        <div class="star-rating" id="modalRatingStars"></div>
+                        <span class="rating-value" id="modalRating"></span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Ingredients
+                    </h3>
+                    <ul class="ingredients-list" id="modalIngredients"></ul>
+                </div>
+
+                <div class="detail-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-list-ol"></i>
+                        Instructions
+                    </h3>
+                    <ol class="steps-list" id="modalSteps"></ol>
+                </div>
+
+                <div class="comment-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-comments"></i>
+                        Comments
+                    </h3>
+                    
+                    <div id="commentFormContainer">
+                        <!-- Login prompt or comment form -->
+                    </div>
+                    
+                    <div id="commentsContainer">
+                        <!-- Comments will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Recipe Modal -->
+    <div class="modal" id="addRecipeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Share Your Recipe</div>
+                <button class="close-btn" onclick="closeAddRecipeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="recipeForm">
+                    <div class="detail-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Basic Information
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipeTitle">Recipe Title</label>
+                                <input type="text" id="recipeTitle" placeholder="e.g., Classic Chocolate Chip Cookies" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipeCategory">Category</label>
+                                <select id="recipeCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="Vegetarian">Vegetarian</option>
+                                    <option value="Dessert">Dessert</option>
+                                    <option value="Quick">Quick</option>
+                                    <option value="Main Course">Main Course</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipeTime">Preparation Time (minutes)</label>
+                                <input type="number" id="recipeTime" placeholder="e.g., 45" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipeDifficulty">Difficulty</label>
+                                <select id="recipeDifficulty" required>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="recipeImage">Recipe Image</label>
+                            <div class="image-upload-container">
+                                <input type="url" id="recipeImageURL" placeholder="Enter image URL (https://...)" class="image-input">
+                                <span class="or-divider">OR</span>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" id="recipeImageFile" accept="image/*" class="file-input">
+                                    <label for="recipeImageFile" class="file-label">
+                                        <i class="fas fa-upload"></i>
+                                        <span id="fileNameDisplay">Choose image from device</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="imagePreview" class="image-preview"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-clipboard-list"></i>
+                            Ingredients
+                        </h3>
+                        <div id="ingredientsContainer">
+                            <div class="ingredient-row">
+                                <input type="text" class="ingredient-input" placeholder="e.g., 2 cups all-purpose flour">
+                                <button type="button" class="remove-btn" onclick="removeIngredient(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-more-btn" onclick="addIngredientField()">
+                            <i class="fas fa-plus"></i>
+                            Add Ingredient
+                        </button>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-list-ol"></i>
+                            Instructions
+                        </h3>
+                        <div id="instructionsContainer">
+                            <div class="instruction-row">
+                                <textarea class="instruction-input" placeholder="e.g., Preheat oven to 350°F" rows="2"></textarea>
+                                <button type="button" class="remove-btn" onclick="removeInstruction(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="add-more-btn" onclick="addInstructionField()">
+                            <i class="fas fa-plus"></i>
+                            Add Step
+                        </button>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeAddRecipeModal()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-share"></i>
+                            Share Recipe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content login-modal">
+            <div class="modal-header">
+                <div class="modal-title" id="loginModalTitle">Login</div>
+                <button class="close-btn" onclick="closeLoginModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+                </div>
+                
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginUsername">Username</label>
+                        <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </button>
+                </form>
+                
+                <form id="signupForm" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" placeholder="Choose a username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Choose a password (min 6 characters)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupConfirmPassword">Confirm Password</label>
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <div class="toast-message" id="toastMessage"></div>
+        <button class="toast-close" onclick="hideToast()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
